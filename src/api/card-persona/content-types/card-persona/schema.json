@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "card_personas",
+  "info": {
+    "singularName": "card-persona",
+    "pluralName": "card-personas",
+    "displayName": "card-persona"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "string",
+      "required": true
+    },
+    "Photo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
