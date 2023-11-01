@@ -417,6 +417,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     singularName: 'post';
     pluralName: 'posts';
     displayName: 'Post';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -424,8 +425,22 @@ export interface ApiPostPost extends Schema.CollectionType {
   attributes: {
     Titulo: Attribute.String;
     Descripcion: Attribute.Text & Attribute.DefaultTo<'Descripcion'>;
-    Markdown: Attribute.RichText;
-    Json: Attribute.JSON;
+    EditorHTML: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    EditorMarkdown: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'Markdown';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
