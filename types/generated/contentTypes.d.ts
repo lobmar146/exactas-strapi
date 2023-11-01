@@ -362,6 +362,63 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCardPersonaCardPersona extends Schema.CollectionType {
+  collectionName: 'card_personas';
+  info: {
+    singularName: 'card-persona';
+    pluralName: 'card-personas';
+    displayName: 'card-persona';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Description: Attribute.String & Attribute.Required;
+    Photo: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::card-persona.card-persona',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::card-persona.card-persona',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'Post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Titulo: Attribute.String;
+    Descripcion: Attribute.Text & Attribute.DefaultTo<'Descripcion'>;
+    Markdown: Attribute.RichText;
+    Json: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -677,63 +734,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiCardPersonaCardPersona extends Schema.CollectionType {
-  collectionName: 'card_personas';
-  info: {
-    singularName: 'card-persona';
-    pluralName: 'card-personas';
-    displayName: 'card-persona';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Description: Attribute.String & Attribute.Required;
-    Photo: Attribute.Media & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::card-persona.card-persona',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::card-persona.card-persona',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPostPost extends Schema.CollectionType {
-  collectionName: 'posts';
-  info: {
-    singularName: 'post';
-    pluralName: 'posts';
-    displayName: 'Post';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Titulo: Attribute.String;
-    Descripcion: Attribute.Text & Attribute.DefaultTo<'Descripcion'>;
-    Markdown: Attribute.RichText;
-    Json: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -744,14 +744,14 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::card-persona.card-persona': ApiCardPersonaCardPersona;
+      'api::post.post': ApiPostPost;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::card-persona.card-persona': ApiCardPersonaCardPersona;
-      'api::post.post': ApiPostPost;
     }
   }
 }

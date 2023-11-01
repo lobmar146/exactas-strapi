@@ -4,7 +4,8 @@
   "info": {
     "singularName": "card-persona",
     "pluralName": "card-personas",
-    "displayName": "card-persona"
+    "displayName": "card-persona",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,12 +21,28 @@
       "required": true
     },
     "Photo": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "EditorHTML": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "EditorMarkdown": {
+      "type": "customField",
+      "options": {
+        "output": "Markdown",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
