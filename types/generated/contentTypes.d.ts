@@ -368,6 +368,7 @@ export interface ApiCardPersonaCardPersona extends Schema.CollectionType {
     singularName: 'card-persona';
     pluralName: 'card-personas';
     displayName: 'card-persona';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -376,6 +377,22 @@ export interface ApiCardPersonaCardPersona extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required;
     Description: Attribute.String & Attribute.Required;
     Photo: Attribute.Media & Attribute.Required;
+    EditorHTML: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    EditorMarkdown: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'Markdown';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
