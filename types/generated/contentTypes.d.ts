@@ -726,6 +726,42 @@ export interface ApiCardPersonaCardPersona extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Slug: Attribute.UID;
+    Name: Attribute.String;
+    pages: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::page.page'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -748,6 +784,11 @@ export interface ApiPagePage extends Schema.CollectionType {
           preset: 'rich';
         }
       >;
+    category: Attribute.Relation<
+      'api::page.page',
+      'manyToOne',
+      'api::category.category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -815,6 +856,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::card-persona.card-persona': ApiCardPersonaCardPersona;
+      'api::category.category': ApiCategoryCategory;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
     }
